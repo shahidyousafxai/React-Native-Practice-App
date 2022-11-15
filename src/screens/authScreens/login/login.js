@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
-import {View, TextInput, Text, Button, TouchableWithoutFeedback, Keyboard} from "react-native"
+import {View, TextInput, Text, Button, TouchableOpacity} from "react-native"
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view"
 import Toast from "react-native-toast-message"
 import styles from './styles'
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const LogUserIntoInspire = () =>{
+    const LogUserIntoApp = () =>{
       alert("login")
     }
 
@@ -21,19 +21,19 @@ const Login = () => {
               });
         }
         if(email !== "" && password !== ""){
-            LogUserIntoInspire()
+          LogUserIntoApp()
         }
     }
 
   return (
     <KeyboardAwareScrollView
-    style={styles.fullscreen}
-    showsVerticalScrollIndicator={false}
+      style={styles.fullscreen}
+      showsVerticalScrollIndicator={false}
       enableOnAndroid={true}
       contentContainerStyle={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
       keyboardShouldPersistTaps="handled"
     >
-      <Toast topOffset={0} visibilityTime={4000} />
+      <Toast topOffset={0} visibilityTime={5000} />
         <View style={styles.login}>
             <View style={styles.loginTextView}>
                 <Text style={styles.loginText}>Login</Text>
@@ -52,11 +52,22 @@ const Login = () => {
                 onChangeText={setPassword}
                 />
                 <Button
-                style={styles.button}
                 title="Login"
                 onPress={()=> loginUser()}
                 />
             </View>
+            <View style={styles.already}>
+            <Text>Doesn't have an account?</Text>
+            <TouchableOpacity
+            onPress={() => {
+                navigation.navigate("Register");
+            }}
+            >
+            <Text style={styles.regText}>
+              Register
+            </Text>
+            </TouchableOpacity>
+        </View>
         </View>
         </KeyboardAwareScrollView>
   )

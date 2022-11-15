@@ -4,7 +4,6 @@ import { CommonActions } from '@react-navigation/native';
 import styles from './styles'
 
 const WelcomeScreen = ({navigation}) => {
-  console.log("Reached.....")
   useEffect(() => {
     setTimeout(()=>{
       navigation.dispatch(
@@ -12,12 +11,12 @@ const WelcomeScreen = ({navigation}) => {
           index: 0,
           routes: [
             {
-              name: 'Login',
+              name: 'Auth',
             },
           ],
         })
       ) 
-    }, 3000)
+    }, 0.1)
      
   }, []);
   return (

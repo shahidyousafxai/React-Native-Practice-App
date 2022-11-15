@@ -1,19 +1,16 @@
 import React from 'react'
 import {SafeAreaView} from "react-native"
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { navigationRef } from './rootNavigation';
-import Login from '../screens/login/login'
+import Auth from './auth/auth'
 import WelcomeScreen from '../screens/welcome/welcomeScreen'
-
 
 const StackApp = createSharedElementStackNavigator();
 const navOptionHandler = () => ({
   headerShown: false,
   animationEnabled: false,
 });
-
 
 const App = () => {
   return (
@@ -29,8 +26,8 @@ const App = () => {
           options={navOptionHandler}
         />
         <StackApp.Screen
-          name="Login"
-          component={Login}
+          name="Auth"
+          component={Auth}
           options={navOptionHandler}
         />
         </StackApp.Navigator>

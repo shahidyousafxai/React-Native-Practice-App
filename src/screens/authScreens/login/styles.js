@@ -14,7 +14,6 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   login:{
-    // backgroundColor: "aqua",
     width: "100%",
     height: "100%",
     display: "flex",
@@ -35,4 +34,14 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  already:{
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 30,
+  },
+  regText:{
+    fontWeight: "bold",
+  }
 });
