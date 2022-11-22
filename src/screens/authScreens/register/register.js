@@ -1,7 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity} from 'react-native';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
-import Toast from "react-native-toast-message"
+import Toast from "react-native-toast-message";
+import { registerUserApi } from '../../../services/api/methods/register';
 import styles from './styles';
 
 const Register = ({navigation}) => {
@@ -9,21 +11,50 @@ const Register = ({navigation}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const RegisterUserIntoApp = () =>{
-        alert("User registered")
-    }
+    let details = {
+      full_name: username,
+      email: email,
+      password: password,
+    };
 
     const registerUser = () =>{
-        if (email === '' || password === '' || username === ''){
-            Toast.show({
-                type: 'error',
-                text1: 'Username, Email and Password should not be empty!',
-              });
-        }
-        if(email !== "" && password !== ""){
-          RegisterUserIntoApp()
-        }
+      if (email === '' || password === '' || username === ''){
+          Toast.show({
+              type: 'error',
+              text1: 'Username, Email and Password should not be empty!',
+            });
+      }
+      if(email !== "" && password !== ""){
+        RegisterUserIntoApp(details)
+      }
     }
+
+    const RegisterUserIntoApp = (payload) => {
+      try {
+        registerUserApi(payload)
+        .then(async (res)=>{
+          if(res.data.data.token && res.data.status === 200){
+            setUsername("");
+            setEmail("");
+            setEmail("")
+            await AsyncStorage.setItem("token", res.data.data.token)
+            .then(()=>{
+              navigation.navigate("Login")
+            })
+            Toast.show({
+              type: "success",
+              text1:"User has been registered successfully",
+            })
+          }
+        })
+        .catch((err)=>{
+          console.log("RegisterApi", err)
+        })
+      } catch (err) {
+        console.log("Register", err)
+      }
+      };
+
   return (
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
@@ -57,7 +88,7 @@ const Register = ({navigation}) => {
             onChangeText={setPassword}
             />
             <Button
-            title="Login"
+            title="Register"
             onPress={()=> registerUser()}
             />
         </View>
@@ -77,5 +108,4 @@ const Register = ({navigation}) => {
     </KeyboardAwareScrollView>
   )
 }
-
 export default Register

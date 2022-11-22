@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { CommonActions } from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 import styles from './styles'
 
 const WelcomeScreen = ({navigation}) => {
@@ -16,12 +17,14 @@ const WelcomeScreen = ({navigation}) => {
           ],
         })
       ) 
-    }, 0.1)
+    }, 3000)
      
   }, []);
   return (
     <View style={styles.welcome}>
-        <Text>Welcome to the React Native App</Text>
+      <Animatable.Text animation="zoomIn" duration={2000} style={{fontSize: 20}}>
+        Welcome to the React Native App
+        </Animatable.Text>
     </View>
   )
 }

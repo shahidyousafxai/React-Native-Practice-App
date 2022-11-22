@@ -11,7 +11,7 @@ const navOptionHandler = () =>({
 
 const Auth = () => {
   return (
-    <AuthStack.Navigator initialRouteName='Register'>
+    <AuthStack.Navigator initialRouteName='Login'>
         <AuthStack.Screen
         name='Login'
         component={Login}

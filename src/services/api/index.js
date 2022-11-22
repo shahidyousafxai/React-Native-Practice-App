@@ -1,12 +1,77 @@
-import { client, clientMultiPart, clientWithOutToken } from './config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
-export const getRequest = (url) => client.get(url);
+const local = 'http://localhost/api/v1';
 
-export const postRequest = (url, payload = {}) => client.post(url, payload);
+// GET Request
+export const getRequest = (url, payload) => {
+  const res = axios.get(
+    `${local}${url}`,
+  );
+  return res
+};
 
-export const patchRequest = (url, payload = {}) => client.patch(url, payload);
+// Authorized GET Request
+export const authGetRequest = async (url) => {
+  const token = await AsyncStorage.getItem("token");
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+  }
+  const res = axios.get(
+    `${local}${url}`,
+    {
+      headers: headers,
+    },
+  );
+  return res
+};
+ // Authorized POST Request
+ export const authPostRequest = async (url, payload) => {
+  const token = await AsyncStorage.getItem("token");
+  
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+  }
+  const res = axios.post(
+    `${local}${url}`,
+    payload,
+    {
+       headers: headers,
+    },
+  );
+  return res
+};
 
-export const putRequest = (url, payload = {}) => client.put(url, payload);
-
-export const deleteRequest = (url, payload = {}) =>
-  client.delete(url, { payload });
+//POST Request
+export const postRequest = (url, payload) => {
+  const res = axios.post(
+    `${local}${url}`,
+    payload,
+    {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  );
+  return res
+};
+export const patchRequest = (url, payload) => {
+  const res = axios.patch(
+    `${local}${url}`,
+    payload,
+  );
+  return res
+};
+export const putRequest = (url, payload) => {
+  const res = axios.put(
+    `${local}${url}`,
+    payload,
+  );
+  return res
+};
+export const deleteRequest = (url, payload) => {
+  const res = axios.delete(
+    `${local}${url}`,
+    payload,
+  );
+  return res
+};

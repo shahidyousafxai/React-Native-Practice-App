@@ -1,23 +1,19 @@
-import React from 'react'
-import {Text, StatusBar, Platform} from "react-native"
+import React, {useState, createContext} from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import App from "./app"
 
-
-
-if(Platform === "android"){
-  StatusBar.setBackgroundColor('transparent');
-  StatusBar.setTranslucent(true);
-}
-StatusBar.setBarStyle('dark-content');
+export const asyncStoreContext = createContext(null);
 
 const Navigation = () => {
+  const [token, setToken] = useState(false)
+
+
   return (
-    <SafeAreaProvider>
-        <App/>
-    </SafeAreaProvider>
-    
+      <SafeAreaProvider>
+        <asyncStoreContext.Provider value={[token, setToken]}>
+          <App/>
+        </asyncStoreContext.Provider>
+      </SafeAreaProvider>
   )
 }
-
 export default Navigation
