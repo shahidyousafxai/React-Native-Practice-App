@@ -5,11 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './rootNavigation';
 import Auth from './auth/auth';
 import WelcomeScreen from '../screens/welcome/welcomeScreen';
-import Inspire from "../screens/inspire/inspire";
+import BottomTabs from "../navigation/BottomTabs/BottomTabs";
 // import { asyncStoreContext } from "./Navigation"
 
 const StackApp = createSharedElementStackNavigator();
-const navOptionHandler = () => ({
+const navbarOptions = () => ({
   headerShown: false,
   animationEnabled: false,
 });
@@ -28,25 +28,18 @@ const App = () => {
           <StackApp.Screen
             name="Welcome"
             component={WelcomeScreen}
-            options={navOptionHandler}
+            options={navbarOptions}
           />
-          {/* {AsyncData.token ? (
-            <> */}
-            <StackApp.Screen
-            name="Inspire"
-            component={Inspire}
-            options={navOptionHandler}
-          />
-            {/* </>
-          ) : (
-            <> */}
             <StackApp.Screen
               name="Auth"
               component={Auth}
-              options={navOptionHandler}
+              options={navbarOptions}
           />
-            {/* </>
-          )} */}
+            <StackApp.Screen
+            name="BottomTabs"
+            component={BottomTabs}
+            options={navbarOptions}
+          />
         </StackApp.Navigator>
       </NavigationContainer>
     </SafeAreaView>

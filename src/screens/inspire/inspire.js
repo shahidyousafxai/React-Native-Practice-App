@@ -6,7 +6,7 @@ import {logoutUser} from "../../services/api/methods/logout";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as DeviceInfo from "react-native-device-info"
 import Toast from "react-native-toast-message"
-import styles from "./styles" 
+import TopTabs from "../../components/topTabs/topTabs"
 
 
 const Inspire = ({navigation}) => {
@@ -35,14 +35,7 @@ const Inspire = ({navigation}) => {
       <View>
       <Button title="Logout" onPress={()=>{postLogout()}}/>
       </View>
-        <View style={styles.Tabs}>
-            <TouchableOpacity onPress={()=>{setInspire(true)}}>
-                <Text>Inspire</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{setInspire(false)}}>
-                <Text>Following</Text>
-            </TouchableOpacity>
-        </View>
+      <TopTabs setInspire={setInspire} LeftTab="Inspire" RightTab="Following"/>
         <View style={{width: "100%", height: "100%"}}>
         {inspire ? (
           <InspireScreen

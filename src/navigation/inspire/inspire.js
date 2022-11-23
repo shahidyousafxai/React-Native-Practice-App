@@ -6,7 +6,7 @@ import Inspire from "../../screens/inspire/inspire"
 
 const StackApp = createSharedElementStackNavigator();
 
-const navOptionHandler = () => ({
+const navbarOptions = () => ({
     headerShown: false,
     animationEnabled: false, 
 })
@@ -17,7 +17,7 @@ const Inspire = () => {
     <StackApp.Screen 
     name="Inspire" 
     component={Inspire} 
-    options={navOptionHandler} />
+    options={navbarOptions} />
   </StackApp.Navigator>
   )
 }

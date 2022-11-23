@@ -4,9 +4,18 @@ import axios from 'axios';
 const local = 'http://localhost/api/v1';
 
 // GET Request
-export const getRequest = (url, payload) => {
+export const getRequest = (url) => {
   const res = axios.get(
     `${local}${url}`,
+  );
+  return res
+};
+
+// GET Request with payload
+export const getRequestWithPayload = (url, payload) => {
+  const res = axios.get(
+    `${local}${url}`,
+    payload,
   );
   return res
 };
@@ -25,6 +34,7 @@ export const authGetRequest = async (url) => {
   );
   return res
 };
+
  // Authorized POST Request
  export const authPostRequest = async (url, payload) => {
   const token = await AsyncStorage.getItem("token");

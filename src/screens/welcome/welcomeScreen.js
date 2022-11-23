@@ -17,7 +17,7 @@ const WelcomeScreen = ({navigation}) => {
           ],
         })
       ) 
-    }, 3000)
+    }, 500)
      
   }, []);
   return (

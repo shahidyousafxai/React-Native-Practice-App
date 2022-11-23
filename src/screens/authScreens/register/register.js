@@ -38,7 +38,8 @@ const Register = ({navigation}) => {
             setEmail("");
             setEmail("")
             await AsyncStorage.setItem("token", res.data.data.token)
-            .then(()=>{
+            .then(async()=>{
+              await AsyncStorage.setItem("UserId", res.data.data.user.id)
               navigation.navigate("Login")
             })
             Toast.show({

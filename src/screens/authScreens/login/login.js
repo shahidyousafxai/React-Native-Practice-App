@@ -37,14 +37,13 @@ const Login = ({navigation}) => {
       try {
         logInApi(payload)
         .then(async (res)=>{
-
           if(res.data.data.token && res.data.status === 200){
-
             await AsyncStorage.setItem("token", res.data.data.token)
-            .then(()=>{
+            .then(async()=>{
+              await AsyncStorage.setItem("UserId", JSON.stringify(res.data.data.user.id))
               navigation.reset({
                 index: 0,
-                routes: [{ name: 'Inspire' }],
+                routes: [{ name: 'BottomTabs' }],
               });
             })
               

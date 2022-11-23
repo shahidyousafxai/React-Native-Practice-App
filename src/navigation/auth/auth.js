@@ -4,7 +4,7 @@ import Login from "../../screens/authScreens/login/login"
 import Register from "../../screens/authScreens/register/register"
 
 const AuthStack = createStackNavigator()
-const navOptionHandler = () =>({
+const navbarOptions = () =>({
     headerShown: false,
     animationEnabled: false
 })
@@ -15,12 +15,12 @@ const Auth = () => {
         <AuthStack.Screen
         name='Login'
         component={Login}
-        options={navOptionHandler}
+        options={navbarOptions}
         />
         <AuthStack.Screen
         name='Register'
         component={Register}
-        options={navOptionHandler}     
+        options={navbarOptions}     
         />
     </AuthStack.Navigator>
     
